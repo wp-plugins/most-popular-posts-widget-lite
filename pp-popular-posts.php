@@ -31,6 +31,7 @@ function popular_posts_statistics_activate() {
 // podczas odinstalowania - usuwanie tabeli
 function popular_posts_statistics_uninstall() {
 	global $wpdb;
+	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
 	delete_option('widget_popular_posts_statistics');
 	$wpdb->query( "DROP TABLE IF EXISTS $popular_posts_statistics_table" );
 }
