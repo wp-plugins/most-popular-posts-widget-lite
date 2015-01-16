@@ -1,8 +1,16 @@
-#pp-container, #pp-container a {
+#pp-container, #pp-container a, #pp-container ol {
 	font-weight: bold;
 	color: black;
 	font-size: 105%;
 	text-decoration: none;
+	list-style: outside none none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#pp-container a:hover {
+	text-decoration: underline ;
+	color: white;
 }
 
 #pp-count {
