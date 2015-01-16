@@ -27,6 +27,7 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 == Screenshots ==
 
 1. Most Popular Posts Widget Lite visible on right block.
+2. Options menu.
 
 == Changelog ==
 * 0.8
