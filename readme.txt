@@ -15,12 +15,15 @@ Widget which displays statistics of most popular posts based on mumber of visits
 
 Most Popular Posts Widget Lite is a widget that displays statistics of most popular posts based on mumber of visits. Lite version. Easy to customize - just edit CSS file. Soon version with more options and styles.
 
+Widget could be not compatible with catching plugins, like W3 Total Cache etc.
+
 == Installation ==
 
 1. Upload the zip to 'plugins' directory
 2. Unzip (steps 1 and 2 can also be performed automatically)
 3. Activate the plugin
 4. Configure and place the widget on your sidebar
+5. Now wait some time until widget gather data to show bars
 
 Or just add .zip file as a new plugin in your Wordpress administration panel.
 
