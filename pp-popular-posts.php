@@ -4,7 +4,7 @@ Plugin Name: Most Popular Posts Widget Lite
 Plugin URI: http://smartfan.pl/
 Description: Widget which displays statistics of most popular posts based on mumber of visits. Lite version.
 Author: Piotr Pesta
-Version: 0.8
+Version: 0.9
 Author URI: http://smartfan.pl/
 License: GPL12
 */
