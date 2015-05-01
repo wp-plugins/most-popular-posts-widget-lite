@@ -4,8 +4,8 @@ Plugin URI: http://smartfan.pl/
 Tags: widget, bars, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
-Tested up to: 4.1
-Stable tag: 0.9
+Tested up to: 4.2.1
+Stable tag: 0.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,8 +33,13 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 2. Options menu.
 
 == Changelog ==
-* 0.8
-Initial Release
-* 0.9
-Code cleanup
-SQL Injection security fix
+
+= 0.8 =
+* Initial Release
+= 0.9 =
+* Code cleanup
+* SQL Injection security fix
+= 0.9.1 =
+* Now you can include posts that were visited in last 15 or 30 days
+* UI description fix
+* 4.2.1 compatibility

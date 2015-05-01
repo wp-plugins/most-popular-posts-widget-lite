@@ -4,7 +4,7 @@ Plugin Name: Most Popular Posts Widget Lite
 Plugin URI: http://smartfan.pl/
 Description: Widget which displays statistics of most popular posts based on mumber of visits. Lite version.
 Author: Piotr Pesta
-Version: 0.9
+Version: 0.9.1
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -75,15 +75,17 @@ function form($instance) {
 </p>
 
 <p>
-<label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Number of days:</label>
+<label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Only include articels that were visited in last:</label>
 <select id="<?php echo $this->get_field_id( 'numberofdays' ); ?>" name="<?php echo $this->get_field_name('numberofdays'); ?>" value="<?php echo $instance['numberofdays']; ?>" style="width:100%;">
-	<option value="1" <?php if ($instance['numberofdays']==1) {echo "selected"; } ?>>1</option>
-	<option value="2" <?php if ($instance['numberofdays']==2) {echo "selected"; } ?>>2</option>
-	<option value="3" <?php if ($instance['numberofdays']==3) {echo "selected"; } ?>>3</option>
-	<option value="4" <?php if ($instance['numberofdays']==4) {echo "selected"; } ?>>4</option>
-	<option value="5" <?php if ($instance['numberofdays']==5) {echo "selected"; } ?>>5</option>
-	<option value="6" <?php if ($instance['numberofdays']==6) {echo "selected"; } ?>>6</option>
-	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7</option>
+	<option value="1" <?php if ($instance['numberofdays']==1) {echo "selected"; } ?>>1 day</option>
+	<option val ue="2" <?php if ($instance['numberofdays']==2) {echo "selected"; } ?>>2 days</option>
+	<option value="3" <?php if ($instance['numberofdays']==3) {echo "selected"; } ?>>3 days</option>
+	<option value="4" <?php if ($instance['numberofdays']==4) {echo "selected"; } ?>>4 days</option>
+	<option value="5" <?php if ($instance['numberofdays']==5) {echo "selected"; } ?>>5 days</option>
+	<option value="6" <?php if ($instance['numberofdays']==6) {echo "selected"; } ?>>6 days</option>
+	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7 days</option>
+	<option value="15" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>15 days</option>
+	<option value="30" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>30 days</option>
 </select>
 </p>
 
