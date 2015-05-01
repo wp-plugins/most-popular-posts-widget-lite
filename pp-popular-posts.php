@@ -84,8 +84,8 @@ function form($instance) {
 	<option value="5" <?php if ($instance['numberofdays']==5) {echo "selected"; } ?>>5 days</option>
 	<option value="6" <?php if ($instance['numberofdays']==6) {echo "selected"; } ?>>6 days</option>
 	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7 days</option>
-	<option value="15" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>15 days</option>
-	<option value="30" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>30 days</option>
+	<option value="15" <?php if ($instance['numberofdays']==15) {echo "selected"; } ?>>15 days</option>
+	<option value="30" <?php if ($instance['numberofdays']==30) {echo "selected"; } ?>>30 days</option>
 </select>
 </p>
 
