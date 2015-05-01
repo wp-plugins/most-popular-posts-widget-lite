@@ -1,4 +1,5 @@
 === Most Popular Posts Widget Lite ===
+Contributors: Piotr Pesta
 Plugin Name: Most Popular Posts Widget Lite
 Plugin URI: http://smartfan.pl/
 Tags: widget, bars, pupular, pupularity, visits, counter
