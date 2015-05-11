@@ -18,6 +18,8 @@ Most Popular Posts Widget Lite is a widget that displays statistics of most popu
 
 Widget could be not compatible with catching plugins, like W3 Total Cache etc.
 
+If you would like to show your support for this software, please consider donating: [Donate via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EEDF5TV3M2WVG).
+
 == Installation ==
 
 1. Upload the zip to 'plugins' directory
