@@ -1,4 +1,4 @@
-=== Most Popular Posts Widget Lite ===
+=== Most Popular Posts Widget ===
 Contributors: Piotr Pesta
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EEDF5TV3M2WVG&lc=US
 Plugin Name: Most Popular Posts Widget Lite
@@ -7,15 +7,31 @@ Tags: widget, bars, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.2
-Stable tag: 0.9.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Widget which displays statistics of most popular posts based on mumber of visits. Lite version.
+Most Popular Posts is a widget that is able to display a list of the most popular posts visited by the readers of your site. With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
 
 == Description ==
 
-Most Popular Posts Widget Lite is a widget that displays statistics of most popular posts based on mumber of visits. Lite version. Easy to customize - just edit CSS file. Soon version with more options and styles.
+Most Popular Posts is a widget that is able to display a list of the most popular posts visited by the readers of your site. With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
+
+If you are worried about your server's resources, I can assure you that the widget extremely tight cares about this issue. Its simple design makes you sure that the database on your server will not be filled with unnecessary data.
+
+= You can customize: =
+* The title of the widget
+* The number of the displayed items (to choose from 1 to 10)
+* Showing only those posts that were visited by example. Last 30 days (to choose from range from 1 to 30 days)
+* Disable or enable the display of the number of visits
+* Exclude from displaying specific pages and whole categories (by their ID)
+* Change translation
+* Change the appearance of the widget (you can choose from 6 ready styles or create your own (file custom.css), along with subsequent updates of the number of available styles will increase)
+* Clean the widget data from SQL database (if you decide that take too much)
+
+In addition, the widget has a built-in filtering visits robots, so that the collected data do not include web bots. Widget styles perfectly cope with the parties and look great on mobile devices.
+
+Widget is very simple to install and use, which should not be a straightforward problem to anyone.
 
 Widget could be not compatible with catching plugins, like W3 Total Cache etc.
 
@@ -33,8 +49,15 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 
 == Screenshots ==
 
-1. Most Popular Posts Widget Lite visible on right block.
-2. Options menu.
+1. Style 1.
+2. Style 2.
+3. Style 3.
+4. Style 4.
+5. Style 5.
+6. Style 6.
+7. Style 7.
+8. Options menu.
+9. Widget visible in right column.
 
 == Changelog ==
 
@@ -47,3 +70,6 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 * Now you can include posts that were visited in last 15 or 30 days
 * UI description fix
 * 4.2.1 compatibility
+= 1.0.0 =
+* 6 new changable styles + custom.css file to customize bars
+* Few new features
