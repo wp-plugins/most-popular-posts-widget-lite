@@ -11,11 +11,11 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Most Popular Posts is a widget that is able to display a list of the most popular posts of your site (ranked by number of visits or number of comments). With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
+Most Popular Posts is a widget that is able to display a list of the most popular posts of your site (ranked by number of visits or number of comments).
 
 == Description ==
 
-Most Popular Posts is a widget that is able to display a list of the most popular posts visited by the readers of your site. With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
+Most Popular Posts is a widget that is able to display a list of the most popular posts of your site (ranked by number of visits or number of comments). With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
 
 If you are worried about your server's resources, I can assure you that the widget extremely tight cares about this issue. Its simple design makes you sure that the database on your server will not be filled with unnecessary data.
 
