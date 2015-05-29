@@ -7,11 +7,11 @@ Tags: widget, bars, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Most Popular Posts is a widget that is able to display a list of the most popular posts visited by the readers of your site. With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
+Most Popular Posts is a widget that is able to display a list of the most popular posts of your site (ranked by number of visits or number of comments). With it you can show your visitors which content are most popular, and built-in styles give you the ability to customize its appearance to your page. Widget / plugin is ideal for small news sites and blogs. This is an excellent way to increase click-through rate and reduce the bounce rate of page.
 
 == Description ==
 
@@ -21,6 +21,7 @@ If you are worried about your server's resources, I can assure you that the widg
 
 = You can customize: =
 * The title of the widget
+* Rank posts popularity by number of comments or visits
 * The number of the displayed items (to choose from 1 to 10)
 * Showing only those posts that were visited by example. Last 30 days (to choose from range from 1 to 30 days)
 * Disable or enable the display of the number of visits
@@ -60,16 +61,18 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 9. Widget visible in right column.
 
 == Changelog ==
-
-= 0.8 =
-* Initial Release
-= 0.9 =
-* Code cleanup
-* SQL Injection security fix
+= 1.0.1 =
+* Ability to rank posts by number of comments
+* Now you can buy premium styles for this plugin
+= 1.0.0 =
+* 6 new changeable styles + custom.css file to customize bars
+* Few new features
 = 0.9.1 =
 * Now you can include posts that were visited in last 15 or 30 days
 * UI description fix
 * 4.2.1 compatibility
-= 1.0.0 =
-* 6 new changable styles + custom.css file to customize bars
-* Few new features
+= 0.9 =
+* Code clean-up
+* SQL Injection security fix
+= 0.8 =
+* Initial Release

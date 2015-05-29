@@ -2,9 +2,9 @@
 /*
 Plugin Name: Most Popular Posts Widget
 Plugin URI: http://smartfan.pl/
-Description: Most Popular Posts is a widget that is able to display a list of the most popular posts visited by the readers of your site.
+Description: Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.
 Author: Piotr Pesta
-Version: 1.0.0
+Version: 1.0.1
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -49,7 +49,7 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('cleandatabase' => '', 'visitstext' => 'visit(s)', 'ignoredcategories' => '', 'ignoredpages' => '', 'hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
+	$defaults = array('commentsorvisits' => '1', 'cleandatabase' => '', 'visitstext' => 'visit(s)', 'ignoredcategories' => '', 'ignoredpages' => '', 'hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
@@ -59,8 +59,16 @@ function form($instance) {
 </p>
 
 <p>
+<label for="<?php echo $this->get_field_id('commentsorvisits'); ?>">Rank posts popularity by number of comments or visits?</label>
+<select id="<?php echo $this->get_field_id('commentsorvisits'); ?>" name="<?php echo $this->get_field_name('commentsorvisits'); ?>" value="<?php echo $instance['commentsorvisits']; ?>" style="width:100%;">	
+	<option value="1" <?php if ($instance['commentsorvisits']==1) {echo "selected";} ?>>Visits</option>
+	<option value="2" <?php if ($instance['commentsorvisits']==2) {echo "selected";} ?>>Comments</option>
+</select>
+</p>
+
+<p>
 <label for="<?php echo $this->get_field_id('posnumber'); ?>">Number of positions:</label>
-<select id="<?php echo $this->get_field_id('posnumber'); ?>" name="<?php echo $this->get_field_name('posnumber'); ?>" value="<?php echo $instance['posnumber']; ?>" style="width:100%;">	
+<select id="<?php echo $this->get_field_id('posnumber'); ?>" name="<?php echo $this->get_field_name('posnumber'); ?>" value="<?php echo $instance['posnumber']; ?>" style="width:100%;">
 	<option value="2" <?php if ($instance['posnumber']==2) {echo "selected";} ?>>1</option>
 	<option value="3" <?php if ($instance['posnumber']==3) {echo "selected";} ?>>2</option>
 	<option value="4" <?php if ($instance['posnumber']==4) {echo "selected";} ?>>3</option>
@@ -75,7 +83,7 @@ function form($instance) {
 </p>
 
 <p>
-<label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Only include articels that were visited in last:</label>
+<label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Only include articels that were visited/created in last:</label>
 <select id="<?php echo $this->get_field_id( 'numberofdays' ); ?>" name="<?php echo $this->get_field_name('numberofdays'); ?>" value="<?php echo $instance['numberofdays']; ?>" style="width:100%;">
 	<option value="1" <?php if ($instance['numberofdays']==1) {echo "selected"; } ?>>1 day</option>
 	<option value="2" <?php if ($instance['numberofdays']==2) {echo "selected"; } ?>>2 days</option>
@@ -86,12 +94,17 @@ function form($instance) {
 	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7 days</option>
 	<option value="15" <?php if ($instance['numberofdays']==15) {echo "selected"; } ?>>15 days</option>
 	<option value="30" <?php if ($instance['numberofdays']==30) {echo "selected"; } ?>>30 days</option>
+	<option value="180" <?php if ($instance['numberofdays']==180) {echo "selected"; } ?>>180 days</option>
+	<option value="365" <?php if ($instance['numberofdays']==365) {echo "selected"; } ?>>1 year</option>
+	<option value="730" <?php if ($instance['numberofdays']==730) {echo "selected"; } ?>>2 years</option>
+	<option value="1825" <?php if ($instance['numberofdays']==1825) {echo "selected"; } ?>>5 years</option>
+	<option value="3650" <?php if ($instance['numberofdays']==3650) {echo "selected"; } ?>>10 years</option>
 </select>
 </p>
 
 <p>
 <input type="checkbox" id="<?php echo $this->get_field_id('hitsonoff'); ?>" name="<?php echo $this->get_field_name('hitsonoff'); ?>" value="1" <?php checked($instance['hitsonoff'], 1); ?>/>
-<label for="<?php echo $this->get_field_id('hitsonoff'); ?>">Show hit count number?</label>
+<label for="<?php echo $this->get_field_id('hitsonoff'); ?>">Show hit count/comments number?</label>
 </p>
 
 <p>
@@ -107,14 +120,41 @@ function form($instance) {
 <p>
 <label for="<?php echo $this->get_field_id('cssselector'); ?>">Style Select:</label>
 <select id="<?php echo $this->get_field_id('cssselector'); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;">	
-	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected";} ?>>Style no. 1 (color bars)</option>
-	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected";} ?>>Style no. 2 (color bars + text with white outline)</option>
-	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected";} ?>>Style no. 3 (grey numbered list)</option>
-	<option value="4" <?php if ($instance['cssselector']==4) {echo "selected";} ?>>Style no. 4 (grey list with numbers in blue circle)</option>
-	<option value="5" <?php if ($instance['cssselector']==5) {echo "selected";} ?>>Style no. 5 (grey list with red numbers)</option>
-	<option value="6" <?php if ($instance['cssselector']==6) {echo "selected";} ?>>Style no. 6 (simple grey list with grey numbers)</option>
-	<option value="7" <?php if ($instance['cssselector']==7) {echo "selected";} ?>>Custom Style (custom.css)</option>
+	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected";} ?>>Standard Style No. 1 (color bars)</option>
+	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected";} ?>>Standard Style No. 2 (color bars + text with white outline)</option>
+	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected";} ?>>Standard Style No. 3 (grey numbered list)</option>
+	<option value="4" <?php if ($instance['cssselector']==4) {echo "selected";} ?>>Standard Style No. 4 (grey list with numbers in blue circle)</option>
+	<option value="5" <?php if ($instance['cssselector']==5) {echo "selected";} ?>>Standard Style No. 5 (grey list with red numbers)</option>
+	<option value="6" <?php if ($instance['cssselector']==6) {echo "selected";} ?>>Standard Style No. 6 (simple grey list with grey numbers)</option>
+	<option value="7" <?php if ($instance['cssselector']==7) {echo "selected";} ?>>Custom Style (edit custom.css file)</option>
+	<?php 
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-1-premium.css')){
+	?>		<option value="8" <?php if ($instance['cssselector']==8) {echo "selected";} ?>>Premium Style No. 1</option>
+	<?php
+			}
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-2-premium.css')){
+	?>		<option value="9" <?php if ($instance['cssselector']==9) {echo "selected";} ?>>Premium Style No. 2</option>
+	<?php
+			}
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-3-premium.css')){
+	?>		<option value="10" <?php if ($instance['cssselector']==10) {echo "selected";} ?>>Premium Style No. 3</option>
+	<?php
+			}
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-4-premium.css')){
+	?>		<option value="11" <?php if ($instance['cssselector']==11) {echo "selected";} ?>>Premium Style No. 4</option>
+	<?php
+			}
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-5-premium.css')){
+	?>		<option value="12" <?php if ($instance['cssselector']==12) {echo "selected";} ?>>Premium Style No. 5</option>
+	<?php
+			}
+		if(file_exists(plugin_dir_path(__FILE__).'style-popular-posts-statistics-6-premium.css')){
+	?>		<option value="13" <?php if ($instance['cssselector']==13) {echo "selected";} ?>>Premium Style No. 6</option>
+	<?php
+			}
+	?>
 </select>
+<p><b><a href="http://smartfan.pl/most-popular-posts-widget-premium-styles/" target="_blank">For as little as $1 you can buy beautiful Premium Styles, just click this link for more instructions.</a></b></p>
 </p>
 
 <p>
@@ -144,6 +184,7 @@ $instance['ignoredpages'] = strip_tags($new_instance['ignoredpages']);
 $instance['ignoredcategories'] = strip_tags($new_instance['ignoredcategories']);
 $instance['visitstext'] = strip_tags($new_instance['visitstext']);
 $instance['cleandatabase'] = strip_tags($new_instance['cleandatabase']);
+$instance['commentsorvisits'] = strip_tags($new_instance['commentsorvisits']);
 return $instance;
 }
 
@@ -164,6 +205,7 @@ $ignoredcategories = trim(preg_replace('/\s+/', '', $ignoredcategories));
 $ignoredcategories = explode(",",$ignoredcategories);
 $visitstext = $instance['visitstext'];
 $cleandatabase = $instance['cleandatabase'];
+$commentsorvisits = $instance['commentsorvisits'];
 echo $before_widget;
 
 // table clean up if user decided
@@ -182,7 +224,7 @@ echo $before_title . $title . $after_title;
 $postID = get_the_ID();
 
 echo '<div id="pp-container">';
-show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext);
+show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext, $commentsorvisits);
 echo '</div>';
 
 add_views($postID);

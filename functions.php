@@ -14,12 +14,12 @@ function add_views($postID) {
 }
 
 // results displaying
-function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext) {
+function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext, $commentsorvisits) {
 	global $wpdb;
 	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
 	$posts_table = $wpdb->prefix . 'posts';
-	if ($wpdb->query("SELECT hit_count FROM $popular_posts_statistics_table")) {
-		$result = $wpdb->get_results("SELECT hit_count FROM $popular_posts_statistics_table WHERE date >= NOW() - INTERVAL $numberofdays DAY ORDER BY hit_count DESC", ARRAY_A);
+	if ($wpdb->query("SELECT hit_count FROM $popular_posts_statistics_table") && $commentsorvisits == 1) {
+		$result = $wpdb->get_results("SELECT hit_count FROM $popular_posts_statistics_table WHERE date >= NOW() - INTERVAL $numberofdays DAY ORDER BY hit_count DESC LIMIT $posnumber", ARRAY_A);
 		$post_id_number = $wpdb->get_results("SELECT post_id FROM $popular_posts_statistics_table WHERE date >= NOW() - INTERVAL $numberofdays DAY ORDER BY hit_count DESC LIMIT $posnumber", ARRAY_A);
 		echo "<ol>";
 		for ($i = 0; $i < count($post_id_number); ++$i) {
@@ -50,7 +50,36 @@ function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpage
 			}
 		}
 		echo "</ol>";
-	}
+	}elseif($commentsorvisits == 2) { //If user wants rank by comment count
+		$posnumber = $posnumber - 1;
+		$result = $wpdb->get_results("SELECT comment_count FROM $posts_table WHERE post_date >= NOW() - INTERVAL $numberofdays DAY ORDER BY comment_count DESC LIMIT $posnumber", ARRAY_A);
+		$post_id_number = $wpdb->get_results("SELECT ID FROM $posts_table WHERE post_date >= NOW() - INTERVAL $numberofdays DAY ORDER BY comment_count DESC LIMIT $posnumber", ARRAY_A);
+		echo "<ol>";
+		for ($i = 0; $i < count($post_id_number); ++$i) {
+			$post_number = $post_id_number[$i]['ID'];
+			$post_link = get_permalink($post_number); // get permalink from wordpress database
+			$countbeginning = "<br /><span id=\"pp-count\">";
+			$countending = "</span></span></li><br />";
+			$cat_id = get_the_category($post_number);
+			$post_cat_id = $cat_id[0]->cat_ID;
+			$post_name_by_id = $wpdb->get_results("SELECT post_title FROM $posts_table WHERE ID = $post_number", ARRAY_A);
+			if (in_array($post_cat_id, $ignoredcategories) || in_array($post_number, $ignoredpages)) { // checks whether post ID or his category ID is not excluded by user
+				$cat_or_post_check = TRUE;
+			}else {
+				$cat_or_post_check = FALSE;
+			}
+			if ($cat_or_post_check == FALSE) {
+				static $x = 0; // static mamkes $x variable is not nulled after end of loop
+				echo '<li><span id="pp-' . $x++ . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) { // if user turned on displaying number of visits
+				echo $countbeginning . $result[$i]['comment_count'] . " " . $visitstext . $countending;
+				}else {
+					echo "</span></li><br />";
+				}
+			}
+		}
+		echo "</ol>";
+		}
 }
 
 // style selection
@@ -69,6 +98,18 @@ function choose_style($css_sel) {
 		return 'style-popular-posts-statistics-6.css';
 	} elseif($css_sel == 7){
 		return 'custom.css';
+	} elseif($css_sel == 8){
+		return 'style-popular-posts-statistics-1-premium.css';
+	} elseif($css_sel == 9){
+		return 'style-popular-posts-statistics-2-premium.css';
+	} elseif($css_sel == 10){
+		return 'style-popular-posts-statistics-3-premium.css';
+	} elseif($css_sel == 11){
+		return 'style-popular-posts-statistics-4-premium.css';
+	} elseif($css_sel == 12){
+		return 'style-popular-posts-statistics-5-premium.css';
+	} elseif($css_sel == 13){
+		return 'style-popular-posts-statistics-6-premium.css';
 	}
 }
 

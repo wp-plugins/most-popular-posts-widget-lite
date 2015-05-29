@@ -44,7 +44,7 @@
 }
 
 #pp-container a:after {
-    position: absolute; 
+    position: absolute;
     content: '';
     border: .5em solid transparent;
     left: -1em;
