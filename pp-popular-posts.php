@@ -4,7 +4,7 @@ Plugin Name: Most Popular Posts Widget
 Plugin URI: http://smartfan.pl/
 Description: Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.
 Author: Piotr Pesta
-Version: 1.0.1
+Version: 1.1.0
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -15,6 +15,7 @@ $options = get_option('widget_popular_posts_statistics');
 
 register_activation_hook(__FILE__, 'popular_posts_statistics_activate');
 register_uninstall_hook(__FILE__, 'popular_posts_statistics_uninstall');
+add_shortcode("most-popular-posts", "most_popular_posts_shortcode_handler"); // shortcode hook
 
 // installation and mysql table creation
 function popular_posts_statistics_activate() {
@@ -40,8 +41,9 @@ class popular_posts_statistics extends WP_Widget {
 
 // widget constructor
 function popular_posts_statistics() {
-
-	$this->WP_Widget(false, $name = __('Popular Posts Statistics', 'wp_widget_plugin'));
+	
+	$widget_ops = array('description' => __('Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.'));
+	$this->WP_Widget(false, $name = __('Most Popular Posts Widget', 'wp_widget_plugin'), $widget_ops);
 
 }
 
@@ -119,7 +121,11 @@ function form($instance) {
 
 <p>
 <label for="<?php echo $this->get_field_id('cssselector'); ?>">Style Select:</label>
-<select id="<?php echo $this->get_field_id('cssselector'); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;">	
+<select id="<?php echo $this->get_field_id('cssselector'); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;" onchange="
+	if (this.options[this.selectedIndex].value == 'http://smartfan.pl/most-popular-posts-widget-premium-styles/') {
+		window.open( this.options[ this.selectedIndex ].value, '_blank');
+	}
+">
 	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected";} ?>>Standard Style No. 1 (color bars)</option>
 	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected";} ?>>Standard Style No. 2 (color bars + text with white outline)</option>
 	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected";} ?>>Standard Style No. 3 (grey numbered list)</option>
@@ -153,9 +159,8 @@ function form($instance) {
 	<?php
 			}
 	?>
+	<option value="http://smartfan.pl/most-popular-posts-widget-premium-styles/">More styles... (for $1 only!)</option>
 </select>
-<p><b><a href="http://smartfan.pl/most-popular-posts-widget-premium-styles/" target="_blank">For as little as $1 you can buy beautiful Premium Styles, just click this link for more instructions.</a></b></p>
-</p>
 
 <p>
 	<label for="<?php echo $this->get_field_id('visitstext'); ?>">If you would like to change "visit(s)" text, you can do it here:</label>
@@ -163,8 +168,8 @@ function form($instance) {
 </p>
 
 <p>
-<input type="checkbox" id="<?php echo $this->get_field_id('cleandatabase'); ?>" name="<?php echo $this->get_field_name('cleandatabase'); ?>" value="1" <?php checked($instance['cleandatabase'], 1); ?>/>
-<label for="<?php echo $this->get_field_id('cleandatabase'); ?>"><b>Delete all widget collected data?</b> (Check it only if you feel that database data is too large and makes widget run slow!)</label>
+	<input type="checkbox" id="<?php echo $this->get_field_id('cleandatabase'); ?>" name="<?php echo $this->get_field_name('cleandatabase'); ?>" value="1" <?php checked($instance['cleandatabase'], 1); ?>/>
+	<label for="<?php echo $this->get_field_id('cleandatabase'); ?>"><b>Delete all widget collected data?</b> (Check it only if you feel that database data is too large and makes widget run slow!)</label>
 </p>
 
 <?php
@@ -218,7 +223,7 @@ if ($cleandatabase == 1){
 
 // title check
 if ($title) {
-echo $before_title . $title . $after_title;
+	echo $before_title . $title . $after_title;
 }
 
 $postID = get_the_ID();
@@ -231,6 +236,28 @@ add_views($postID);
 
 echo $after_widget;
 }
+}
+
+// shortcode function
+function most_popular_posts_shortcode_handler() {
+	$widgetOptions = get_option('widget_popular_posts_statistics');
+     
+	$postID = get_the_ID();
+	$posnumber = $widgetOptions[2]['posnumber'];
+	$numberofdays = $widgetOptions[2]['numberofdays'];
+	$hitsonoff = $widgetOptions[2]['hitsonoff'];
+	$ignoredpages = array($widgetOptions[2]['ignoredpages']);
+	$ignoredcategories = array($widgetOptions[2]['ignoredcategories']);
+	$visitstext = $widgetOptions[2]['visitstext'];
+	$commentsorvisits = $widgetOptions[2]['commentsorvisits'];
+
+	ob_start();
+	echo '<div id="pp-container">';
+	show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext, $commentsorvisits);
+	echo '</div>';
+	$ret = ob_get_contents();	
+	ob_end_clean();
+	return $ret;
 }
 
 // widget registration

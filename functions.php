@@ -40,8 +40,7 @@ function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpage
 				$cat_or_post_check = FALSE;
 			}
 			if ($cat_or_post_check == FALSE) {
-				static $x = 0; // static mamkes $x variable is not nulled after end of loop
-				echo '<li><span id="pp-' . $x++ . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				echo '<li><span id="pp-' . $i . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
 				if ($hitsonoff) { // if user turned on displaying number of visits
 				echo $countbeginning . $result[$i]['hit_count'] . " " . $visitstext . $countending;
 				}else {
@@ -63,14 +62,16 @@ function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpage
 			$cat_id = get_the_category($post_number);
 			$post_cat_id = $cat_id[0]->cat_ID;
 			$post_name_by_id = $wpdb->get_results("SELECT post_title FROM $posts_table WHERE ID = $post_number", ARRAY_A);
+			if($result[$i]['comment_count'] == 0) {
+				break;
+			}
 			if (in_array($post_cat_id, $ignoredcategories) || in_array($post_number, $ignoredpages)) { // checks whether post ID or his category ID is not excluded by user
 				$cat_or_post_check = TRUE;
 			}else {
 				$cat_or_post_check = FALSE;
 			}
 			if ($cat_or_post_check == FALSE) {
-				static $x = 0; // static mamkes $x variable is not nulled after end of loop
-				echo '<li><span id="pp-' . $x++ . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				echo '<li><span id="pp-' . $i . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
 				if ($hitsonoff) { // if user turned on displaying number of visits
 				echo $countbeginning . $result[$i]['comment_count'] . " " . $visitstext . $countending;
 				}else {
