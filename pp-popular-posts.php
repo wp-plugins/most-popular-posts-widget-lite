@@ -4,7 +4,7 @@ Plugin Name: Most Popular Posts Widget
 Plugin URI: http://smartfan.pl/
 Description: Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.
 Author: Piotr Pesta
-Version: 1.1.0
+Version: 1.1.1
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -243,17 +243,17 @@ function most_popular_posts_shortcode_handler() {
 	$widgetOptions = get_option('widget_popular_posts_statistics');
      
 	$postID = get_the_ID();
-	$posnumber = $widgetOptions[2]['posnumber'];
-	$numberofdays = $widgetOptions[2]['numberofdays'];
-	$hitsonoff = $widgetOptions[2]['hitsonoff'];
-	$ignoredpages = array($widgetOptions[2]['ignoredpages']);
-	$ignoredcategories = array($widgetOptions[2]['ignoredcategories']);
-	$visitstext = $widgetOptions[2]['visitstext'];
-	$commentsorvisits = $widgetOptions[2]['commentsorvisits'];
+	$posnumber = array_column($widgetOptions, 'posnumber');
+	$numberofdays = array_column($widgetOptions, 'numberofdays');
+	$hitsonoff = array_column($widgetOptions, 'hitsonoff');
+	$ignoredpages = array(array_column($widgetOptions, 'ignoredpages'));
+	$ignoredcategories = array(array_column($widgetOptions, 'ignoredcategories'));
+	$visitstext = array_column($widgetOptions, 'visitstext');
+	$commentsorvisits = array_column($widgetOptions, 'commentsorvisits');
 
 	ob_start();
 	echo '<div id="pp-container">';
-	show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext, $commentsorvisits);
+	show_views($postID, $posnumber[0], $numberofdays[0], $hitsonoff[0], $ignoredpages, $ignoredcategories, $visitstext[0], $commentsorvisits[0]);
 	echo '</div>';
 	$ret = ob_get_contents();	
 	ob_end_clean();

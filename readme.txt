@@ -7,7 +7,7 @@ Tags: widget, bars, pupular, pupularity, visits, counter
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,8 @@ If you wish to show widget in post first set up widget options and save them. Af
 9. Widget visible in right column.
 
 == Changelog ==
+= 1.1.1 =
+* Shortcode bugfix
 = 1.1.0 =
 * Shortcode support
 * Minor bugs fixes
