@@ -4,7 +4,7 @@ Plugin Name: Most Popular Posts Widget
 Plugin URI: http://smartfan.pl/
 Description: Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.
 Author: Piotr Pesta
-Version: 1.1.1
+Version: 1.1.2
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -43,7 +43,7 @@ class popular_posts_statistics extends WP_Widget {
 function popular_posts_statistics() {
 	
 	$widget_ops = array('description' => __('Most Popular Posts is a widget that is able to display a list of the most popular posts visited/commented by the readers of your site.'));
-	$this->WP_Widget(false, $name = __('Most Popular Posts Widget', 'wp_widget_plugin'), $widget_ops);
+	parent::__construct(false, $name = __('Most Popular Posts Widget', 'wp_widget_plugin'), $widget_ops);
 
 }
 
